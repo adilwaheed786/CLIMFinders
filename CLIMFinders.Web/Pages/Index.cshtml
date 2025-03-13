@@ -1,0 +1,72 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Locate your<br>impounded car<br>in one click</h1>
+        <p>We can help you find your impounded car ASAP</p>
+        <button class="search-button">Search Now</button>
+    </div>
+</section>
+
+<section class="trusted">
+    <h2>Trusted By <span class="orange">Many Users Worldwide</span></h2>
+</section>
+
+<section class="about">
+    <div class="about-image">
+        <img src="~/images/truck.png" alt="Tow Truck">
+    </div>
+    <div class="about-content">
+        <h2>Impound Finders</h2>
+        <p>
+            Our mission is to connect vehicle owners with facilities that may have impounded their vehicles. By
+            simply searching using the VIN number, users can determine if their car is located at one of our
+            partner facilities or any that have registered with us.
+        </p>
+        <p>
+            We also have the opportunity to register as facilities and towing companies, allowing them to receive
+            alerts whenever a user searches for a vehicle that matches their records. Our service offers a
+            streamlined solution for locating impounded vehicles efficiently.
+        </p>
+    </div>
+</section>
+
+<section class="services">
+    <h2>Services</h2>
+    <div class="service-cards">
+        <div class="service-card">
+            <h3>Vehicle Impound </br> Search</h3>
+            <p>
+                Users can search for their impounded vehicles using the VIN number to check if they are at a
+                registered partner facility.
+            </p>
+        </div>
+        <div class="service-card highlight">
+            <h3>Facility & Towing </br> Company Registration</h3>
+            <p>
+                Businesses, including impound facilities and towing companies, can register to receive alerts
+                when a user searches for a vehicle in their records.
+            </p>
+        </div>
+        <div class="service-card">
+            <h3>Impound Location </br> Search</h3>
+            <p>
+                The service provides a streamlined solution to help vehicle owners locate their impounded cars
+                efficiently.
+            </p>
+        </div>
+    </div>
+</section>
+<partial name="_SubscriptionPartial" model="Model.InputPlans" />
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="~/customJs/subscriptionscript.js"></script>
+
+
+

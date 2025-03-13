@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMFinders.Web", "CLIMFinders.Web\CLIMFinders.Web.csproj", "{ADEE94D7-4E86-4090-8037-BA7AD347B460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMFinders.Application", "CLIMFinders.Application\CLIMFinders.Application.csproj", "{F27308BD-2064-4F69-98E3-98C7A6067A15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMFinders.Infrastructure", "CLIMFinders.Infrastructure\CLIMFinders.Infrastructure.csproj", "{56968FAD-E13B-4F2E-8674-374956F51A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMFinders.Domain", "CLIMFinders.Domain\CLIMFinders.Domain.csproj", "{D68D86BF-4C05-4FE2-8348-8215F2427176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIMFinders.StripeProcess", "CLIMFinders.StripeProcess\CLIMFinders.StripeProcess.csproj", "{89BD2B27-E7EE-4FBA-9129-19C28EEEAE13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADEE94D7-4E86-4090-8037-BA7AD347B460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEE94D7-4E86-4090-8037-BA7AD347B460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEE94D7-4E86-4090-8037-BA7AD347B460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEE94D7-4E86-4090-8037-BA7AD347B460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27308BD-2064-4F69-98E3-98C7A6067A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27308BD-2064-4F69-98E3-98C7A6067A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27308BD-2064-4F69-98E3-98C7A6067A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27308BD-2064-4F69-98E3-98C7A6067A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56968FAD-E13B-4F2E-8674-374956F51A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56968FAD-E13B-4F2E-8674-374956F51A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56968FAD-E13B-4F2E-8674-374956F51A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56968FAD-E13B-4F2E-8674-374956F51A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D68D86BF-4C05-4FE2-8348-8215F2427176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D68D86BF-4C05-4FE2-8348-8215F2427176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D68D86BF-4C05-4FE2-8348-8215F2427176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D68D86BF-4C05-4FE2-8348-8215F2427176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89BD2B27-E7EE-4FBA-9129-19C28EEEAE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89BD2B27-E7EE-4FBA-9129-19C28EEEAE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89BD2B27-E7EE-4FBA-9129-19C28EEEAE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89BD2B27-E7EE-4FBA-9129-19C28EEEAE13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

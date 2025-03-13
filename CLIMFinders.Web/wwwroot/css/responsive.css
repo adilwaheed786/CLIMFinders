@@ -1,0 +1,446 @@
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
+/* RESPONSIVE CSS */
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+@media (min-width:1440px) and (max-width:1800px) {
+}
+
+@media (max-width:1599px) {
+  .b-services-nav {
+    padding: 0;
+  }
+}
+
+
+
+@media (min-width:992px) and (max-width:1600px) {
+}
+/* end 992px-1600px */
+
+@media (min-width:1440px) and (max-width:1600px) {
+}
+@media (min-width:1200px) and (max-width:1439px) {
+}
+
+
+@media (min-width:992px) and (max-width:1199px) {
+  .b-services-nav__link,
+  .b-post-nav__title {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+/* end 992px-1199px */
+
+
+
+@media (max-width:1199px) {
+    
+ 
+  .b-post-full .entry-media {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .section-goods-vip {
+    display: block;
+  }
+  .b-goods-vip {
+    width: 100%;
+  }
+  .b-bnr-2__figure {
+    display: none;
+  }
+  .b-post-3 .entry-media {
+    max-height: 400px;
+  }
+  .b-post-3 .entry-media a {
+    height: 400px;
+    display: block;
+  }
+  .b-post-3 .entry-media img {
+    height: 100%;
+  }
+  .b-seller__main {
+    padding-left: 30px;
+  }
+  .b-seller__ic {
+    display: none;
+  }
+  .top-bar__item,
+  .top-bar__btn {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+/* end 1199px */
+
+
+
+@media (max-width:991px) {
+    
+    
+    
+  .b-goods-f-price {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .section-title-page {
+    margin-top: 110px;
+  }
+  .b-post-full img {
+    margin-bottom: 15px;
+  }
+  .b-post-2 .entry-media {
+    padding-left: 15px;
+    margin-top: 10px;
+  }
+  .b-goods-other {
+    padding-top: 50px;
+    padding-bottom: 10px;
+  }
+  .section-fag:after {
+    display: none;
+  }
+  .header-contacts {
+    padding-right: 60px;
+  }
+  .b-contacts {
+    margin-left: 0;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .top-bar {
+    display: none;
+  }
+  .widget-rates__table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* end 991px */
+
+
+
+@media (max-width:991px) and (min-width:768px) {
+  .b-goods_list .b-goods__img img {
+    width: 220px;
+  }
+  .b-steps__item {
+    width: 225px;
+  }
+}
+/* end 991px-768px */
+
+
+
+@media (max-width:767px) {
+    
+    html .b-post-nav__label {
+    text-align: center;
+}
+    
+    
+    html .b-post-2 {
+    margin-bottom: 20px;
+}
+    
+    html .b-post-2 .entry-footer {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+    
+    
+        html .nav-tabs .nav-item {
+            margin-right: 0;
+            width: 100%;
+            margin-bottom: 15px;
+}
+    
+    html .b-post-nav__title {
+    padding-top: 20px;
+    padding-bottom: 16px;
+}
+    
+    
+    html .ui-slider-nav .slick-slide {
+    margin-right: 5px;
+    position: relative;
+}
+    
+    html .b-goods-f-price__msrp {
+    width: 100%;
+}
+    
+    html .b-goods-f__links-item {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-left: 0 !important;
+    padding: 8px;
+}
+    
+    
+  .b-goods-f-price__main {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .b-goods-f__link-2 {
+    margin-bottom: 5px;
+  }
+  .b-goods-f-checks {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .b-steps__item {
+    width: 225px;
+  }
+  .b-steps__item {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  .b-steps__item:not(:first-child) .b-steps__btn:after {
+    content: none;
+  }
+  .b-filter-goods__select {
+    margin-right: 0;
+  }
+  .b-title-search {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .b-title-search .btn {
+    position: relative;
+    top: auto;
+    right: 0;
+    width: 100%;
+  }
+  .b-title-search__input {
+    padding-left: 50px;
+    padding-right: 15px;
+  }
+  .b-forum-bnr__main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .b-forum-total {
+    width: 100%;
+  }
+  .b-title-page__info {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .b-title-page__btn {
+    margin-top: 10px;
+    display: inline-block;
+  }
+  html #bbpress-forums .bbp-forums {
+    overflow: scroll !important;
+    min-width: 900px;
+  }
+  html #bbpress-forums {
+    overflow: scroll;
+  }
+  .comments-list .children {
+    margin-left: 0;
+  }
+  .b-post-full .entry-tag {
+    margin-bottom: 5px;
+  }
+  .b-post-nav__item {
+    margin-bottom: 10px;
+  }
+  .b-post-full {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .b-post__video,
+  .b-post-full .entry-footer {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .ml-n30 {
+    margin-left: 0;
+  }
+  .mr-n30 {
+    margin-right: 0;
+  }
+  .b-post-full .entry-media {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .b-post-2 .entry-title {
+    margin-top: 0;
+  }
+  .btns-switch,
+  .b-filter-goods_center .btns-switch {
+    display: none;
+  }
+  .b-filter-goods__select {
+    margin-bottom: 5px;
+  }
+  .b-filter-goods__select {
+    display: block;
+  }
+  .b-post-3 .entry-meta__item,
+  .b-post-2 .entry-meta__item,
+  .b-post-1 .entry-meta__item,
+  .b-post-full .entry-meta__item {
+    display: block;
+  }
+  .b-post-3 .entry-meta__item:not(:first-child),
+  .b-post-2 .entry-meta__item:not(:first-child),
+  .b-post-1 .entry-meta__item:not(:first-child) {
+    border-left: none;
+  }
+  .b-post-2 .entry-meta__item:not(:last-child),
+  .b-post-full .entry-meta__item:not(:last-child) {
+    border-right: none;
+  }
+  .footer-section_link {
+    margin-left: 0;
+  }
+  .b-bnr-3 .b-phone {
+    padding-right: 0;
+    margin-right: 0;
+    border-right: none;
+  }
+  .b-bnr-2 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .b-bnr-2_first {
+    margin-left: 0;
+    text-align: center;
+  }
+  .b-bnr-2_last {
+    margin-right: 0;
+    text-align: center;
+  }
+  .b-reviews-slider {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .b-reviews__blockquote {
+    padding: 95px 35px 60px 25px;
+  }
+  .b-goods-vip {
+    padding: 40px 38px 40px 37px;
+  }
+  .b-goods-slider_mod_op .b-goods-slider__item {
+    opacity: 1;
+  }
+  .b-bnr-contacts__item:first-child {
+    border-right: none;
+  }
+  .b-services-nav__link .ic,
+  .b-services-nav__info {
+    display: none;
+  }
+  .b-services-nav__link {
+    padding: 10px 15px 1px;
+  }
+  .b-isotope-grid {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flip__back .b-goods-info__item {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .b-isotope-filter > li {
+    margin-bottom: 10px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+    
+   .b-isotope-filter > li.current{
+    margin-bottom: 20px;
+}
+    
+    html .b-services-content {
+    padding: 100px 10% 0 10%;
+}
+    
+    html .b-goods-vip_1 .b-goods-vip__slogan {
+    padding-left: 0;
+}
+    
+    html .b-goods-vip__title{
+        margin-bottom: 10px;
+    }
+    
+    
+    html .b-team__media {
+    margin-right: 0;
+    margin-bottom: 15px;
+}
+    
+    
+    .b-bnr-3 .justify-content-end {
+    justify-content: flex-start !important;
+}
+    
+    html .b-goods-slider_mod_op {
+    margin-bottom: 0;
+    margin-top: -40px;
+}
+    
+    
+    html .b-goods-f__slider {
+    margin-bottom: 25px;
+}
+    
+    
+  .section-contacts {
+    padding-bottom: 50px;
+  }
+  .b-phone {
+    margin-bottom: 50px;
+  }
+  .b-goods-slider__main {
+    opacity: 1;
+  }
+  .b-main-filter .btn {
+    width: 100%;
+  }
+  .b-main-filter-slider {
+    margin-top: 30px;
+    position: relative;
+  }
+  .comments-list .comment-datetime {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0;
+  }
+  .comments-list .comment-body {
+    padding-right: 0;
+  }
+  .comments-list .children .comment {
+    padding-left: 40px;
+  }
+  .main-slider__slogan {
+    padding-top: 170px;
+  }
+  .main-slider__title {
+    font-size: 50px;
+  }
+  .main-slider__link {
+    margin-top: 20px;
+  }
+  .main-slider {
+    height: 650px;
+  }
+  .main-slider .sp-arrows {
+    display: none;
+  }
+}
+/* end 767px */
+

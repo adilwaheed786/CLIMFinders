@@ -1,0 +1,139 @@
+﻿@page
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+@using CLIMFinders.Application.Enums
+@model CLIMFinders.Web.Pages.MyAccountModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="container rounded bg-white mt-5 mb-5">
+    <form method="post" asp-action="MyAccount">
+        @* Bussiness Id *@
+        <input type="hidden" asp-for="Input.Id" />
+        @* Business User Id *@
+        <input type="hidden" asp-for="Input.UserId" />
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src="~/images/profile.jpg">
+                    <div>
+                        <strong>Role</strong> :
+                        @{
+                            var RoleName = Model.Input.RoleId == (int)RoleEnum.Business ? @Enum.GetName(typeof(SubRoleEnum), Model.Input.SubRoleId) : "";
+                        }
+                        @RoleName  @Enum.GetName(typeof(RoleEnum), Model.Input.RoleId)
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4 border-right">
+
+                <input type="hidden" asp-for="Input.Id" />
+                <div class="p-3 py-5">
+                    <h4 class="text-right">Profile Information</h4>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.Name" class="form-label"></label><input type="text" class="form-control" asp-for="Input.Name" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.Email" class="form-label"></label><input type="email" class="form-control" asp-for="Input.Email" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.Phone" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="Input.Phone" />
+                        </div>
+                    </div>
+                    @if (User.IsInRole("Tow") || User.IsInRole("Impound"))
+                    {
+                        <div class="row mt-2">
+                            <div class="col-sm-12">
+                                <label asp-for="Input.ContactPerson" class="form-label"></label>
+                                <input type="text" class="form-control" asp-for="Input.ContactPerson" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Input.subscriptionDetail != null)
+                    { 
+                        var planData = @Model.Input.subscriptionDetail;
+
+                       
+                     
+                        <div class="row mt-5">
+                            <strong>Subscription Details</strong>
+                            <p><strong>Plan:</strong> @planData.Plan</p>
+                            <p><strong>Next Payment Date:</strong> @planData.NextPaymentDate</p>
+                            <p><strong>Amount:</strong> @($"{planData.Amount:C}")</p>
+                            <p>
+                                <strong>Status:</strong> @planData.Status
+                                @if (planData.Status == "active")
+                                {
+                                    <button type="button" data-datac="@planData.SubscriptionId" class="btn btn-link" id="acancel">Cancel</button>
+                                }
+                                else
+                                {
+                                    var jsonData = System.Text.Json.JsonSerializer.Serialize(new
+                                    {
+                                        UserId = Model.Input.UserId,
+                                        SessionId = @planData.SessionId,
+                                        PriceId = @planData.PriceModel
+                                    });
+                                    <button type="button" data-datac="@jsonData" class="btn btn-link" id="aRenew">Renew</button>
+                                }
+                            </p>
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            <div class="col-md-4 border-right">
+
+                <div class="p-3 py-5">
+                    <h4 class="text-right">Address</h4>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.Address" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="Input.Address" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.City" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="Input.City" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.State" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="Input.State" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.ZipCode" class="form-label"></label>
+                            <input type="text" class="form-control" asp-for="Input.ZipCode" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label asp-for="Input.Description" class="form-label"></label>
+                            <textarea class="form-control" asp-for="Input.Description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <button class="btn btn-primary profile-button" id="btnUpdate" type="submit">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> 
+
+<script type="text/javascript" src="~/customJs/myaccountScript.js"></script>

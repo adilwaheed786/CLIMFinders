@@ -1,0 +1,83 @@
+﻿@page
+@model CLIMFinders.Web.Areas.Business.Pages.SaveVehicleModel
+@{
+    ViewData["Title"] = Model.Input.Id == 0 ? "Add Vehicle" : "Edit Vehicle";
+}
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">@(Model.Input.Id == 0 ? "Add Vehicle" : "Edit Vehicle")</h2>
+            <form asp-action="SaveVehicle" method="post">
+                <input asp-for="Input.Id" type="hidden" />
+
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.VIN" class="form-label"></label>
+                            <input asp-for="Input.VIN" class="form-control" required />
+                            <span asp-validation-for="Input.VIN" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.PickedOn" class="form-label"></label>
+                            <input type="datetime-local" asp-for="Input.PickedOn" required class="form-control" />
+                            <span asp-validation-for="Input.PickedOn" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.MakeId" class="form-label"></label>
+                            <select asp-for="Input.MakeId" class="form-control" required asp-items="Model.VehicleMakes">
+                                <option value="">-- Choose One --</option>
+                            </select>
+                            <span asp-validation-for="Input.MakeId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3" >
+                            <label asp-for="Input.ModelId" class="form-label"></label>
+                            <select asp-for="Input.ModelId" class="form-control" required asp-items="Model.VehicleModels">
+                                <option value="">-- Choose One --</option>
+                            </select>
+                            <span asp-validation-for="Input.ModelId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3" >
+                            <label asp-for="Input.Year" class="form-label"></label>
+                            <select asp-for="Input.Year" class="form-control" required asp-items="Model.ModelYear">
+                                <option value="">-- Choose One --</option>
+                            </select>
+                            <span asp-validation-for="Input.Year" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3" >
+                            <label asp-for="Input.ColorId" class="form-label"></label>
+                            <select asp-for="Input.ColorId" class="form-control" required asp-items="Model.VehicleColors">
+                                <option value="">-- Choose One --</option>
+                            </select>
+                            <span asp-validation-for="Input.ColorId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3" >
+                            <label asp-for="Input.Status" class="form-label"></label>
+                            <select asp-for="Input.Status" class="form-control" required asp-items="Model.StatusOptions">
+                                <option value="">-- Choose One --</option>
+                            </select>
+                            <span asp-validation-for="Input.Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3" >
+                    <label asp-for="Input.Note" class="form-label"></label>
+                    <textarea asp-for="Input.Note" class="form-control" rows="2"></textarea>
+                </div>
+              
+                <button type="submit" id="testButton" class="btn btn-primary btn-block mt-3">Save </button>
+                <a href="/Business/ManageVehicles" class="btn btn-secondary btn-block mt-3">Cancel</a>
+
+            </form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/customJs/vehiclescripts.js"></script>
+ 

@@ -1,0 +1,80 @@
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+/* COLOR CSS 1*/
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+a,
+.text-primary,
+.list > li > a:hover,
+.pager li > a:hover,
+.pager li > a:hover .icon,
+.search-close:hover,
+.breadcrumb > li > a:hover,
+.widget-list__link:hover,
+.footer a:hover,
+.btn-link:hover,
+.list-mark-4 li:before,
+.list-mark-3 li:before,
+.btn-default:hover,
+.b-reviews__blockquote:after,
+.b-post-soc__link:hover,
+.nav-link.active,
+.nav-link:focus,
+.nav-link:hover,
+.b-goods-f__links-item:hover,
+.list-mark-2 li:before,
+.bbp-forum-title {color: #28af0f;}
+
+
+.bg-primary,
+.btn-primary,
+.panel-default > .panel-heading,
+.slick-dots li.slick-active button,
+.slick-dots li:hover button,
+.list-tags__link:hover,
+.comment-btn:hover,
+.footer-soc__link:hover,
+.b-advantages.active .ic,
+.b-services-nav__link.active,
+.b-services-nav__link:hover,
+.main-slider__link,
+.main-slider__link:before,
+.main-slider__link:after,
+.b-post-full ul li:before,
+.b-filter-goods__info:after,
+.noUi-handle,
+.b-goods-f__descr-title:before,
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus,
+.b-advantages:hover .ic,
+.ui-accordion__link[aria-expanded="true"] .ui-accordion__number,
+.ui-accordion__link:hover .ui-accordion__number,
+.b-goods-other__link:hover,
+.b-steps__btn:after {background-color: #28af0f;}
+
+
+.btn-primary,
+.slick-dots li.slick-active button,
+.slick-dots li:hover button,
+.btn-default:hover,
+.b-post-full .entry-tag:hover {border-color: #28af0f;}
+
+.nav-link.active:after,
+#page-preloader .spinner:before {border-top-color: #28af0f;}
+
+ /* {border-right-color: #28af0f;} */
+
+.widget-title:after,
+.nav-link.active:after {border-left-color: #28af0f;}
+
+.table_primary > thead > tr > th,
+.collapse.in,
+.btn-link:hover,
+.nav-link.active,
+.nav-link:focus,
+.nav-link:hover,
+.b-isotope-filter > li.current a,
+.b-isotope-filter > li:hover a {border-bottom-color: #28af0f;}
+

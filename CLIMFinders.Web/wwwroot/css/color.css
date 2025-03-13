@@ -1,0 +1,84 @@
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+/* COLOR CSS 1*/
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+
+a:hover {
+    color: #e3740e;
+    text-decoration: underline;
+}
+
+a,
+.text-primary,
+.list > li > a:hover,
+.pager li > a:hover,
+.pager li > a:hover .icon,
+.search-close:hover,
+.breadcrumb > li > a:hover,
+.widget-list__link:hover,
+.footer a:hover,
+.btn-link:hover,
+.list-mark-4 li:before,
+.list-mark-3 li:before,
+.btn-default:hover,
+.b-reviews__blockquote:after,
+.b-post-soc__link:hover,
+.nav-link.active,
+.nav-link:focus,
+.nav-link:hover,
+.b-goods-f__links-item:hover,
+.list-mark-2 li:before,
+.bbp-forum-title , html .b-post-full .entry-tag:hover  {color: #e3740e;}
+
+
+.bg-primary,
+.btn-primary,
+.panel-default > .panel-heading,
+.slick-dots li.slick-active button,
+.slick-dots li:hover button,
+.list-tags__link:hover,
+.comment-btn:hover,
+.footer-soc__link:hover,
+.b-advantages.active .ic,
+.b-services-nav__link.active,
+.b-services-nav__link:hover,
+.main-slider__link,
+.main-slider__link:before,
+.main-slider__link:after,
+.b-post-full ul li:before,
+.b-filter-goods__info:after,
+.noUi-handle,
+.b-goods-f__descr-title:before,
+.slick-prev:hover,
+.slick-next:hover,
+.b-advantages:hover .ic,
+.ui-accordion__link[aria-expanded="true"] .ui-accordion__number,
+.ui-accordion__link:hover .ui-accordion__number,
+.b-goods-other__link:hover,
+.b-steps__btn:after , .btn-secondary:hover , b-filter-goods__btn btn , html .page-link:hover , html .page-item.active .page-link:hover ,
+.btn-gray:hover,
+html .btns-switch__item:hover{background-color: #e3740e;}
+
+
+.btn-primary,
+.slick-dots li.slick-active button,
+.slick-dots li:hover button,
+.btn-default:hover,
+.b-post-full .entry-tag:hover {border-color: #e3740e;}
+
+.nav-link.active:after,
+#page-preloader .spinner:before {border-top-color: #e3740e;}
+
+ /* {border-right-color: #e3740e;} */
+
+.widget-title:after,
+.nav-link.active:after {border-left-color: #e3740e;}
+
+.table_primary > thead > tr > th,
+.collapse.in,
+.btn-link:hover,
+.nav-link.active,
+.nav-link:focus,
+.nav-link:hover,
+.b-isotope-filter > li.current a,
+.b-isotope-filter > li:hover a {border-bottom-color: #e3740e;}
+

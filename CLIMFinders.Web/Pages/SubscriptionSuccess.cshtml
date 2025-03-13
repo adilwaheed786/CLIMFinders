@@ -1,0 +1,25 @@
+﻿@page
+@model SubscriptionSuccessModel
+@{
+    ViewData["Title"] = "Subscription Successful";
+}
+
+<div class="text-center">
+    <!-- Home Page -->
+    <section class="py-5 text-center">
+        <div class="container">
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h2>Subscription Successful!</h2>
+                <p>Thank you for subscribing.</p>
+                <strong>Your account verification is pending.<br /> Please check your email and click the verification link to activate your account.<br />If you don’t see the email, check your spam folder or request a new verification email.</strong>
+            }
+            else
+            {
+                <h2>Subscription Renewed Successful!</h2>
+                <p>Thank you for subscribing.</p>
+            }
+        </div>
+    </section>
+</div>

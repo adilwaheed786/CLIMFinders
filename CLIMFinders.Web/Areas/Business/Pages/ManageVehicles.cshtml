@@ -1,0 +1,64 @@
+﻿@page
+@model CLIMFinders.Web.Areas.Business.Pages.ManageVehiclesModel
+@{
+    ViewData["Title"] = "Vehicle Listing";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2>Vehicle Listing
+                <a asp-page="SaveVehicle" class="btn btn-primary mb-3 float-end">Add New Vehicle</a>
+            </h2>
+            <div class="table-responsive w-100">
+                <!-- Vehicle Table -->
+                <div class="toolbar">
+                    
+                </div>
+                <table id="vehicleTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>VIN</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Color</th>
+                            <th>Year</th>
+                            <th>Status</th>
+                            <th>Picked On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vehicle in Model.Input)
+                        {
+                            <tr>
+                                <td>@vehicle.VIN</td>
+                                <td>@vehicle.Make</td>
+                                <td>@vehicle.Model</td>
+                                <td>@vehicle.Color</td>
+                                <td>@vehicle.Year</td>
+                                <td>@vehicle.BoundStatus</td>
+                                <td>@vehicle.PickedOn.ToString("yyyy-MM-dd hh:mm tt")</td>
+                                <td>
+                                    <a href="SaveVehicle?id=@vehicle.Id" class="btn btn-sm btn-warning">Edit</a>
+                                    <a asp-page-handler="Delete" asp-route-id="@vehicle.Id"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Are you sure you want to delete this vehicle?');">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+var $jq = jQuery.noConflict();
+    $jq(document).ready(function () {
+    $jq('#vehicleTable').DataTable();
+});
+</script>

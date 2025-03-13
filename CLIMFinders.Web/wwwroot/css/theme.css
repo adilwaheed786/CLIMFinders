@@ -1,0 +1,82 @@
+/* Bootstrap Theme Customization */
+
+:root {
+    --primary-color: #FF0000; /* Red from logo */
+    --dark-bg: #000100; /* Dark Greenish Black */
+    --hover-color: #000002; /* Deep Blue */
+    --light-bg: #FFFFFF; /* White */
+    --text-color: #FFFFFF;
+    --tbl-hover-color: #F4372C; /* Deep Blue */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--dark-bg);
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--text-color) !important;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-color) !important;
+    }
+
+/* Table */
+.table {
+    background-color: var(--light-bg);
+}
+
+    .table thead {
+        background-color: var(--dark-bg);
+        color: var(--text-color);
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--tbl-hover-color);
+        color: var(--text-color);
+    }
+
+/* Forms */
+.form-control {
+    border: 1px solid var(--dark-bg);
+}
+
+    .form-control:focus {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 5px var(--primary-color) !important;
+    }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: var(--hover-color) !important;
+    }
+
+.btn-secondary {
+    background-color: var(--hover-color) !important;
+    color: var(--text-color) !important;
+}
+
+    .btn-secondary:hover {
+        background-color: var(--primary-color) !important;
+    }
+
+/* Header & Footer */
+.header, .footer {
+    background-color: RED !important;
+    color: var(--text-color) !important;
+    text-align: center !important;
+    padding: 15px !important;
+}
+
+.footer {
+/*    border-top: 0px solid var(--primary-color) !important;*/
+}
+footer.footer p{margin-bottom:0; }

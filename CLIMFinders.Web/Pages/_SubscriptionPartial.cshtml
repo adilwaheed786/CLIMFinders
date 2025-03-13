@@ -1,0 +1,127 @@
+﻿@using CLIMFinders.Application.Enums;
+@model List<CLIMFinders.Application.DTOs.SubscriptionPlansDto>;
+
+@* <div class="business-plans-impound">
+    <div class="business-header">
+        <h2 class="header__title">Subscription plans & features</h2>
+        <p class="header__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nihil, aspernatur odit quaerat obcaecati oper</p>
+    </div>
+
+    <div class="subscription-container">
+        @foreach (var plan in Model)
+        {
+            string cssaa = "personal";
+            string icon = "fa-car";
+            if (plan.Id == 2)
+            {
+                cssaa = "business";
+                icon = "fa-users";
+            }
+
+            var planData = $"{Json.Serialize(plan)}";
+
+            <input type="radio" name="radio" id="@("option"+@plan.Id)">
+            string databstarget = "data-bs-target=#exampleModal data-bs-toggle=modal ";
+            if (User.Identity.IsAuthenticated)
+            {
+                databstarget = "";
+                planData = "";
+            }
+            <label for="@("option"+@plan.Id)" class="subscription__button" @databstarget data-whatever="@planData">
+                <h3 class="subscription__title subscription__title--@cssaa">
+                    @plan.Tier
+                    <i class="subscription__icon fas @icon"></i>
+                </h3>
+                <span class="subscription__price">@($"{plan.Amount:C}") <span class="subscription__price-month">/ mo</span> </span>
+                <ul class="subscription__list">
+                    @foreach (var service in plan.PlanServicesDto)
+                    {
+                        <li class="subscription__item">
+                            <i class="icon-subscription fas fa-check"></i>
+                            <span>
+                                @service.Name
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </label>
+        }
+    </div>
+
+</div> *@
+<section class="pricing">
+    <h2>Subscription plans & features</h2>
+    <p>We offer a multitude of premium plans that come with our exceptional services</p>
+
+    <div class="pricing-cards">
+        @foreach (var plan in Model)
+        {
+            var planData = $"{Json.Serialize(plan)}";
+            if (plan.Id == 1)
+            {
+                <div class="pricing-card" data-bs-target="#exampleModal" data-bs-toggle="modal" data-whatever="@planData">
+                    <h3>User Registration</h3>
+                    <div class="price">$10.00 <span>/mo</span></div>
+                    <ul>
+                        <li>User Registration</li>
+                        <li>Vehicle Search by VIN</li>
+                        <li>Access the search results</li>
+                    </ul>
+                    <button class="subscribe-button">Subscribe</button>
+                </div>
+            }
+            else
+            {
+                <div class="pricing-card" data-bs-target="#exampleModal" data-bs-toggle="modal" data-whatever="@planData">
+                    <h3>Business Registration</h3>
+                    <div class="price">$150.00 <span>/mo</span></div>
+                    <ul>
+                        <li>Business registration</li>
+                        <li>Vehicle Management</li>
+                        <li>Notification System</li>
+                    </ul>
+                    <button class="subscribe-button">Subscribe</button>
+                </div>
+            }
+        }
+    </div>
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="validationForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-5 col-md-10">
+                        <div class="card p-4">
+                            <input id="hdnRole" type="hidden" />
+                            <div class="mb-3" id="dvSubRole">
+                                <input type="radio" class="form-check-input" name="subRole" checked="checked" id="option_@SubRoleEnum.Tow" required value="@($"{(int)SubRoleEnum.Tow}")" />
+                                <label for="option_@SubRoleEnum.Tow" class="form-check-label">@SubRoleEnum.Tow</label>
+                                <input type="radio" class="form-check-input" name="subRole" id="option_@SubRoleEnum.Impound" required value="@($"{(int)SubRoleEnum.Impound}")" />
+                                <label for="option_@SubRoleEnum.Impound" class="form-check-label">@SubRoleEnum.Impound</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label lblName"></label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Enter name" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+                            </div>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="ExecutePlan">Subscribe Now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
