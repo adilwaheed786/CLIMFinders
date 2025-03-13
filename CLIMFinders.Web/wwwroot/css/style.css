@@ -93,10 +93,10 @@ nav {
     text-decoration: none
 }
 
-    .register-button:hover {
+.register-button:hover {
         background-color: var(--primary-color);
-         color:  white;
-    }
+        color: white;
+}
 /* Hero Section */
 .hero {
     background-image: url('/images/banner.png');
@@ -132,6 +132,8 @@ nav {
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease; /* Add this line */
+    text-decoration:none;
+    color:black;
 }
 
 .search-button:hover {
