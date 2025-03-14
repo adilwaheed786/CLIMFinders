@@ -3,7 +3,17 @@
 @{
     ViewData["Title"] = "Vehicle Search";
 }
-
+<div class="container">
+    <!-- File upload section -->
+    <div class="row mt-3">
+        <div class="col-md-10">
+            <input type="file" id="fileInput" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+            <button id="uploadButton" class="btn btn-success w-100">Upload</button>
+        </div>
+    </div>
+</div>
 <h2 class="text-center my-4">Search for Your Vehicle</h2>
 
 <div class="container">
@@ -40,7 +50,7 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div> 
-</div> 
- 
+    </div>
+</div>
+
 <script type="text/javascript" src="~/customJs/searchvehicle.js"></script>

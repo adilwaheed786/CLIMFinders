@@ -23,6 +23,14 @@ namespace CLIMFinders.Application.DTOs
         public int ColorId { get; set; }
         public int Status { get; set; }
         public string Note { get; set; }
+        [DisplayName("Impoundent Location Details")]
+        public string LocationDetails { get; set; }
+        [DisplayName("Contact Information")]
+        public string ContactInformation { get; set; }
+        [DisplayName("Impound Fees /Towing charges")]
+        public int ImpoundFees { get; set; }
+        [DisplayName("Reason for Impoundment")]
+        public string ReasonImpoundent { get; set; }
         [DisplayName("Vehicle Pickup Date & Time")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
@@ -55,6 +63,9 @@ namespace CLIMFinders.Application.DTOs
         public int UserId { get; set; }
         public string? CompanyName { get; set; }
         public string BoundStatus { get; set; }
+        public string ContactInformation { get; set; }
+        public string ImpoundFees { get; set; }
+        public string LocationDetails { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
 

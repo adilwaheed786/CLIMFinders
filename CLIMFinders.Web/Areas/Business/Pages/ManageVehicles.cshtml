@@ -6,13 +6,13 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h2>Vehicle Listing
+            <h2>
+                Vehicle Listing
                 <a asp-page="SaveVehicle" class="btn btn-primary mb-3 float-end">Add New Vehicle</a>
             </h2>
             <div class="table-responsive w-100">
                 <!-- Vehicle Table -->
                 <div class="toolbar">
-                    
                 </div>
                 <table id="vehicleTable" class="table table-striped">
                     <thead>
@@ -24,6 +24,9 @@
                             <th>Year</th>
                             <th>Status</th>
                             <th>Picked On</th>
+                            <th>Contact Info</th>
+                            <th>Impound Fees</th>
+                            <th>Location Detail</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -38,6 +41,9 @@
                                 <td>@vehicle.Year</td>
                                 <td>@vehicle.BoundStatus</td>
                                 <td>@vehicle.PickedOn.ToString("yyyy-MM-dd hh:mm tt")</td>
+                                <td>@vehicle.ContactInformation</td>
+                                <td>@vehicle.ImpoundFees</td>
+                                <td>@vehicle.LocationDetails</td>
                                 <td>
                                     <a href="SaveVehicle?id=@vehicle.Id" class="btn btn-sm btn-warning">Edit</a>
                                     <a asp-page-handler="Delete" asp-route-id="@vehicle.Id"
@@ -57,8 +63,8 @@
 
 <script>
 
-var $jq = jQuery.noConflict();
-    $jq(document).ready(function () {
-    $jq('#vehicleTable').DataTable();
-});
+    var $jq = jQuery.noConflict();
+        $jq(document).ready(function () {
+        $jq('#vehicleTable').DataTable();
+    });
 </script>

@@ -1,9 +1,10 @@
 ﻿using CLIMFinders.Application.Interfaces;
-using Microsoft.Extensions.Options; 
+using Microsoft.Extensions.Options;
 using CLIMFinders.Application.DTOs;
 using MailKit.Security;
 using MimeKit;
 using MailKit.Net.Smtp;
+
 
 namespace CLIMFinders.Infrastructure.Repositories
 {
@@ -23,8 +24,42 @@ namespace CLIMFinders.Infrastructure.Repositories
             string message, bool Isadmin = false
         )
         {
-            Execute(subject, message, emailAddress, Isadmin);            
+            Execute(subject, message, emailAddress, Isadmin);
         }
+
+        public async Task SendEmailWithAttachment(string subject, string message, string filePath)
+        {
+            var smtpProvider = _smtpSettings.Server;
+            var portNumber = Convert.ToInt32(_smtpSettings.Port);
+            var user = _smtpSettings.Username;
+            var password = _smtpSettings.Password;
+            var sender = _smtpSettings.NoreplyFrom;
+            var Userto = _smtpSettings.AdminEmail;
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("", sender));
+            email.To.Add(new MailboxAddress("", Userto));
+            email.Subject = subject;
+
+            var bodyBuilder = new BodyBuilder
+            {
+                HtmlBody = message
+            };
+
+            // Agar file exist karti hai to attachment add karein
+            if (File.Exists(filePath))
+            {
+                bodyBuilder.Attachments.Add(filePath);
+            }
+
+            email.Body = bodyBuilder.ToMessageBody();
+
+            using var smtp = new SmtpClient();
+            await smtp.ConnectAsync(smtpProvider, portNumber, SecureSocketOptions.Auto);
+            await smtp.AuthenticateAsync(user, password);
+            await smtp.SendAsync(email);
+            await smtp.DisconnectAsync(true);
+        }
+
         private void Execute(
            string subject,
            string message,
@@ -58,6 +93,6 @@ namespace CLIMFinders.Infrastructure.Repositories
                 client.Send(emailMessage);
                 client.Disconnect(true);
             }
-        } 
+        }
     }
 }

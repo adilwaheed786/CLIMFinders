@@ -4,6 +4,7 @@ using CLIMFinders.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CLIMFinders.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313171237_addingnewfields")]
+    partial class addingnewfields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -398,17 +401,17 @@ namespace CLIMFinders.Infrastructure.Migrations
                         {
                             Id = 1,
                             AddedById = 1,
-                            AddedOn = new DateTime(2025, 3, 13, 22, 19, 43, 517, DateTimeKind.Local).AddTicks(3614),
+                            AddedOn = new DateTime(2025, 3, 13, 22, 12, 36, 616, DateTimeKind.Local).AddTicks(2305),
                             ConfirmationCode = "",
-                            ConfirmedOn = new DateTime(2025, 3, 13, 22, 19, 43, 517, DateTimeKind.Local).AddTicks(3626),
+                            ConfirmedOn = new DateTime(2025, 3, 13, 22, 12, 36, 616, DateTimeKind.Local).AddTicks(2323),
                             Email = "admin@admin.com",
                             FullName = "Super Admin",
                             IsConfirmed = true,
                             IsDeleted = false,
                             ModifiedById = 1,
-                            ModifiedOn = new DateTime(2025, 3, 13, 22, 19, 43, 517, DateTimeKind.Local).AddTicks(3624),
-                            PasswordHash = "Tfn3Js+pF9AWxZf+OK65bV2HRHErWxA7MTJ4LKw85cI=",
-                            PasswordSalt = "Ftft8pIUs21aEEHBGHSDsg==",
+                            ModifiedOn = new DateTime(2025, 3, 13, 22, 12, 36, 616, DateTimeKind.Local).AddTicks(2319),
+                            PasswordHash = "uhH/Uqw0qiRszjfNtpwL2rF1Q4NA073uWVeiVrtS1MM=",
+                            PasswordSalt = "KR8ZqEMVP6GxBegj3P/BjQ==",
                             RoleId = 3,
                             SessionId = "",
                             SubscriptionId = ""
@@ -1234,8 +1237,9 @@ namespace CLIMFinders.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImpoundFees")
-                        .HasColumnType("int");
+                    b.Property<string>("ImpoundFees")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

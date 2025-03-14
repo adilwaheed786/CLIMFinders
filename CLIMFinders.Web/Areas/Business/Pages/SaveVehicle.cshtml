@@ -31,44 +31,62 @@
                             </select>
                             <span asp-validation-for="Input.MakeId" class="text-danger"></span>
                         </div>
-                        <div class="form-group mb-3" >
+                        <div class="form-group mb-3">
                             <label asp-for="Input.ModelId" class="form-label"></label>
                             <select asp-for="Input.ModelId" class="form-control" required asp-items="Model.VehicleModels">
                                 <option value="">-- Choose One --</option>
                             </select>
                             <span asp-validation-for="Input.ModelId" class="text-danger"></span>
                         </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.ImpoundFees" class="form-label"></label>
+                            <input asp-for="Input.ImpoundFees" class="form-control" required />
+                            <span asp-validation-for="Input.ImpoundFees" class="text-danger"></span>
+                        </div>
                     </div>
                     <!-- Right Column -->
                     <div class="col-md-6">
-                        <div class="form-group mb-3" >
+                        <div class="form-group mb-3">
                             <label asp-for="Input.Year" class="form-label"></label>
                             <select asp-for="Input.Year" class="form-control" required asp-items="Model.ModelYear">
                                 <option value="">-- Choose One --</option>
                             </select>
                             <span asp-validation-for="Input.Year" class="text-danger"></span>
                         </div>
-                        <div class="form-group mb-3" >
+                        <div class="form-group mb-3">
                             <label asp-for="Input.ColorId" class="form-label"></label>
                             <select asp-for="Input.ColorId" class="form-control" required asp-items="Model.VehicleColors">
                                 <option value="">-- Choose One --</option>
                             </select>
                             <span asp-validation-for="Input.ColorId" class="text-danger"></span>
                         </div>
-                        <div class="form-group mb-3" >
+                        <div class="form-group mb-3">
                             <label asp-for="Input.Status" class="form-label"></label>
                             <select asp-for="Input.Status" class="form-control" required asp-items="Model.StatusOptions">
                                 <option value="">-- Choose One --</option>
                             </select>
                             <span asp-validation-for="Input.Status" class="text-danger"></span>
                         </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.ContactInformation" class="form-label"></label>
+                            <input asp-for="Input.ContactInformation" class="form-control" required />
+                            <span asp-validation-for="Input.ContactInformation" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.LocationDetails" class="form-label"></label>
+                            <input asp-for="Input.LocationDetails" class="form-control" required />
+                            <span asp-validation-for="Input.LocationDetails" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group mb-3" >
+                <div class="form-group mb-3">
                     <label asp-for="Input.Note" class="form-label"></label>
                     <textarea asp-for="Input.Note" class="form-control" rows="2"></textarea>
                 </div>
-              
+                <div class="form-group mb-3">
+                    <label asp-for="Input.ReasonImpoundent" class="form-label"></label>
+                    <textarea asp-for="Input.ReasonImpoundent" class="form-control" rows="2"></textarea>
+                </div>
                 <button type="submit" id="testButton" class="btn btn-primary btn-block mt-3">Save </button>
                 <a href="/Business/ManageVehicles" class="btn btn-secondary btn-block mt-3">Cancel</a>
 
@@ -80,4 +98,3 @@
 </div>
 
 <script type="text/javascript" src="~/customJs/vehiclescripts.js"></script>
- 

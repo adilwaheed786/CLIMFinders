@@ -60,7 +60,7 @@
 
         let vin = $("#vinInput").val().trim();
         $("#errorMessage").hide();
-        
+
 
         if (!vin) {
             $("#errorMessage").text("Please enter a VIN").show();
@@ -70,10 +70,10 @@
             url: '/api/search/searchbyvin?vin=' + vin,
             type: "GET",
             contentType: 'application/json',
-            success: function (response) { 
+            success: function (response) {
                 table.clear().draw();
-                 
-                if (response && response.data) {                   
+
+                if (response && response.data) {
                     var status = response.data.status;
                     if (status == "403") {
                         window.location.href = "/SubscriptionRenew";
@@ -81,9 +81,9 @@
                     else {
                         $(".table-responsive").show();
                         var data = response.data.result;
-                        table.clear().rows.add(data).draw();  
+                        table.clear().rows.add(data).draw();
                     }
-                }  
+                }
             },
             error: function (xhr) {
                 console.log(JSON.stringify(xhr));
@@ -103,28 +103,28 @@
     });
 
     $("#uploadButton").on("click", function (e) {
-    var fileInput = document.getElementById("fileInput");
-    var email = $("#emailInput").val();
-    var formData = new FormData();
+        var fileInput = document.getElementById("fileInput");
+        var email = $("#emailInput").val();
+        var formData = new FormData();
 
-    if (fileInput.files.length > 0) {
-        formData.append("file", fileInput.files[0]);
-    }
-    formData.append("emailAddress", email);
-
-    $.ajax({
-        url: "/api/search/uploadfile",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            alert("Email sent successfully with file!");
-        },
-        error: function (xhr) {
-            console.log(xhr);
-            alert("Failed to send email.");
+        if (fileInput.files.length > 0) {
+            formData.append("file", fileInput.files[0]);
         }
-    });
+        formData.append("emailAddress", email);
+
+        $.ajax({
+            url: "/api/search/uploadfile",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert("Email sent successfully with file!");
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                alert("Failed to send email.");
+            }
+        });
     });
 });
