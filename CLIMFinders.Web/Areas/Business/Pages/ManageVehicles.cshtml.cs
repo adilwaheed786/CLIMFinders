@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CLIMFinders.Web.Areas.Business.Pages
 {
-    [CustomAuthorize("Business,SuperAdmin")] 
+    [CustomAuthorize("Business", "SuperAdmin")]
     public class ManageVehiclesModel(IVehicleService vehicleService) : PageModel
     {
         private readonly IVehicleService vehicleService = vehicleService;
