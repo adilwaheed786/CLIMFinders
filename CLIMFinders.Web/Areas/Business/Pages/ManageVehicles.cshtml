@@ -14,19 +14,19 @@
                 <!-- Vehicle Table -->
                 <div class="toolbar">
                 </div>
-                <table id="vehicleTable" class="table table-striped">
-                    <thead>
+                <table id="vehicleTable"  class="table table-striped">
+                    <thead style="background-color:#ff7a1f">
                         <tr>
                             <th>VIN</th>
                             <th>Make</th>
                             <th>Model</th>
                             <th>Color</th>
                             <th>Year</th>
-                            <th>Status</th>
-                            <th>Picked On</th>
                             <th>Contact Info</th>
                             <th>Impound Fees</th>
                             <th>Location Detail</th>
+                            <th>Status</th>
+                            <th>Picked On</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -39,11 +39,11 @@
                                 <td>@vehicle.Model</td>
                                 <td>@vehicle.Color</td>
                                 <td>@vehicle.Year</td>
-                                <td>@vehicle.BoundStatus</td>
-                                <td>@vehicle.PickedOn.ToString("yyyy-MM-dd hh:mm tt")</td>
                                 <td>@vehicle.ContactInformation</td>
                                 <td>@vehicle.ImpoundFees</td>
                                 <td>@vehicle.LocationDetails</td>
+                                <td>@vehicle.BoundStatus</td>
+                                <td>@vehicle.PickedOn.ToString("yyyy-MM-dd hh:mm tt")</td>
                                 <td>
                                     <a href="SaveVehicle?id=@vehicle.Id" class="btn btn-sm btn-warning">Edit</a>
                                     <a asp-page-handler="Delete" asp-route-id="@vehicle.Id"

@@ -148,6 +148,10 @@ namespace CLIMFinders.Infrastructure.Repositories
                     detail.Note = model.Note;
                     detail.PickedOn = model.PickedOn;
                     detail.Year = model.Year;
+                    detail.ContactInformation= model.ContactInformation;    
+                    detail.ImpoundFees = model.ImpoundFees;
+                    detail.LocationDetails = model.LocationDetails; 
+                    detail.ReasonImpoundent = model.ReasonImpoundent;   
                     detail.ModifiedById = _userService.GetUserId();
                     repository.Update(detail);
                     response.Id = detail.Id;

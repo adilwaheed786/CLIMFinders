@@ -10,6 +10,9 @@
             { "data": "model" },
             { "data": "color" },
             { "data": "year" },
+            { "data": "contactInformation" },
+            { "data": "impoundFees" },
+            { "data": "locationDetails" },
             { "data": "boundStatus" },
             { "data": "companyName" },
             {

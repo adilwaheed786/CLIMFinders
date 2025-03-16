@@ -71,7 +71,8 @@ namespace CLIMFinders.Infrastructure.Repositories
             var user = _smtpSettings.Username;
             var password = _smtpSettings.Password;
             var sender = _smtpSettings.NoreplyFrom;
-            string EmailAddress = Isadmin ? _smtpSettings.NoreplyFrom : emailAddress;
+            //string EmailAddress = Isadmin ? _smtpSettings.NoreplyFrom : emailAddress;
+            string EmailAddress = emailAddress;
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress("", sender));
             if (!Isadmin)
