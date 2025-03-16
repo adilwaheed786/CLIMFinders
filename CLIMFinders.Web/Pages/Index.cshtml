@@ -9,7 +9,21 @@
     <div class="hero-content">
         <h1>Locate your<br>impounded car<br>in one click</h1>
         <p>We can help you find your impounded car ASAP</p>
-        <a class="search-button" asp-area="" asp-page="/Register">Search Now</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Users"))
+            {
+                <a class="search-button" asp-area="" asp-page="/Search">Search Now</a>
+            }
+            if (User.IsInRole("Business"))
+            {
+                <a class="search-button" href="/Business/ManageVehicles">Search Now</a>
+            }
+        }
+        else
+        {
+            <a class="search-button" asp-area="" asp-page="/Register">Search Now</a>
+        }
     </div>
 </section>
 
