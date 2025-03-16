@@ -35,9 +35,9 @@
                 <img src="~/images/logo.png" alt="Impound Finders Logo">
             </div>
             <div class="nav-links">
-                <a asp-area="" asp-page="/Index">Home</a>
-                <a asp-area="" asp-page="/Privacy">Privacy</a>
-                <a asp-area="" asp-page="/ContactUs">Contact Us</a>
+                <a class="dontshow" asp-area="" asp-page="/Index">Home</a>
+                <a class="dontshow" asp-area="" asp-page="/Privacy">Privacy</a>
+                <a class="dontshow" asp-area="" asp-page="/ContactUs">Contact Us</a>
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Users"))
                 {
                     <a asp-area="" asp-page="/Search">VIN Search</a>
@@ -79,10 +79,10 @@
         <div class="footer-content">
             <div class="footer-left">
                 <img src="~/images/logo.png" alt="Impound Finders Logo">
-                <div class="newsletter">
+               @*  <div class="newsletter">
                     <input type="email" placeholder="Enter Your Email Address">
-                   @*  <button>Subscribe</button> *@
-                </div>
+                    <button>Subscribe</button>
+                </div> *@
             </div>
             <div class="footer-center">
                 <div class="footer-column">
