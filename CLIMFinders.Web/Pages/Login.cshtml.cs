@@ -49,8 +49,8 @@ namespace CLIMFinders.Web.Pages
             // Redirect based on user role
             return result.RoleId switch
             {
-                //(int)RoleEnum.SuperAdmin => RedirectToPage("/Dashboard", new { area = "Admin" }),
-                //(int)RoleEnum.Users => RedirectToPage("/Search"),
+                (int)RoleEnum.Business => RedirectToPage("/ManageVehicles", new { area = "Business" }),
+                (int)RoleEnum.Users => RedirectToPage("/Search"),
                 //(int)SubRoleEnum.Impound or (int)SubRoleEnum.Tow => RedirectToPage("/ManageVehicles", new { area = "Business" }),
                 _ => RedirectToPage("/Index")
             };
