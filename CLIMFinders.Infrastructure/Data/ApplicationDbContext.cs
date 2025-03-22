@@ -17,6 +17,7 @@ namespace CLIMFinders.Infrastructure.Data
         public virtual DbSet<Notifications> Notifications { get; set; }
         public virtual DbSet<Searches> Searches { get; set; }
         public virtual DbSet<Vehicles> Vehicles { get; set; }
+        public virtual DbSet<VehiclesNotFound> VehiclesNotFound { get; set; }
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<VehicleModel> VehicleModels { get; set; }
         public virtual DbSet<VehicleColor> VehicleColors { get; set; }

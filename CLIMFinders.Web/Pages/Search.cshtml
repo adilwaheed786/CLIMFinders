@@ -5,6 +5,13 @@
 }
 <div class="container my-5 pt-3">
     <!-- Alert Message with Upload Button -->
+    <div class="alert alert-primary d-flex justify-content-between align-items-center" role="alert">
+        <span><strong>Note:</strong> If your vehicle is not found in our records, please add your vehicle details.</span>
+        <a asp-page="SaveUserVehicle" class="btn btn-primary mb-3 float-end">Add Vehicle</a>
+    </div>
+</div>
+<div class="container my-5 pt-3">
+    <!-- Alert Message with Upload Button -->
     <div class="alert alert-info d-flex justify-content-between align-items-center" role="alert">
         <span><strong>Note:</strong> If your vehicle matches our records, please provide complete details about your vehicle, including the required documents, for further verification.</span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">

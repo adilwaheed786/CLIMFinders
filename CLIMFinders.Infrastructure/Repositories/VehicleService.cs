@@ -113,7 +113,20 @@ namespace CLIMFinders.Infrastructure.Repositories
             }
             return response;
         }
-
+        public ResponseDto SaveUserVehicle(VehicleDto vehicle)
+        {
+            ResponseDto response = new();
+            try
+            {
+                response = AddOrUpdateUserVehicle(vehicle);
+            }
+            catch
+            {
+                response.Status = "An unexpected error occurred";
+                throw;
+            }
+            return response;
+        }
         private ResponseDto AddOrUpdateVehicle(VehicleDto model)
         {
             ResponseDto response = new();
@@ -162,6 +175,55 @@ namespace CLIMFinders.Infrastructure.Repositories
             }
             return response;
         }
+        private ResponseDto AddOrUpdateUserVehicle(VehicleDto model)
+        {
+            ResponseDto response = new();
+            var repository = unitOfWork.GetRepository<Vehicles>();
+            if (IsVehicleExists(model.VIN, model.Id))
+            {
+                response.Id = -1;
+                response.Name = model.VIN;
+                response.Status = "Vehicle already exists";
+            }
+            else
+            {
+                if (model.Id == 0)
+                {
+                    var mappedObj = mapper.Map<Vehicles>(model);
+                    mappedObj.UserId = _userService.GetUserId();
+                    mappedObj.AddedById = mappedObj.ModifiedById = _userService.GetUserId();
+                    var entity = repository.Insert(mappedObj);
+                    response.Id = entity.Id;
+                    response.Name = entity.VIN;
+                    response.Status = "Vehicle detail added successfully";
+                }
+                else
+                {
+                    var detail = repository.GetById(model.Id);
+                    detail.UserId = _userService.GetUserId();
+                    detail.Status = model.Status;
+                    detail.VIN = model.VIN;
+                    detail.ColorId = model.ColorId;
+                    detail.MakeId = model.MakeId;
+                    detail.ModelId = model.ModelId;
+                    detail.Note = model.Note;
+                    detail.PickedOn = model.PickedOn;
+                    detail.Year = model.Year;
+                    detail.ContactInformation = model.ContactInformation;
+                    detail.ImpoundFees = model.ImpoundFees;
+                    detail.LocationDetails = model.LocationDetails;
+                    detail.ReasonImpoundent = model.ReasonImpoundent;
+                    detail.ModifiedById = _userService.GetUserId();
+                    repository.Update(detail);
+                    response.Id = detail.Id;
+                    response.Name = detail.VIN;
+                    response.Status = "Vehicle detail updated successfully";
+                }
+                repository.Save();
+            }
+            return response;
+        }
+
         public VehicleDto GetVehicle(int Id)
         {
             try

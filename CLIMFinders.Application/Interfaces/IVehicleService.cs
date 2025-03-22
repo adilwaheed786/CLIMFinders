@@ -17,6 +17,7 @@ namespace CLIMFinders.Application.Interfaces
         List<SelectListItem> StatusOptions();
         List<SelectListItem> PopulateYear();
         ResponseDto SaveVehicle(VehicleDto vehicle);
+        ResponseDto SaveUserVehicle(VehicleDto vehicle);
         List<VehicleListDto> GetVehicles();
         VehicleDto GetVehicle(int Id);
         void DeleteVehicle(int Id);
