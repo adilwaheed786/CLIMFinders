@@ -178,8 +178,8 @@ namespace CLIMFinders.Infrastructure.Repositories
         private ResponseDto AddOrUpdateUserVehicle(VehicleDto model)
         {
             ResponseDto response = new();
-            var repository = unitOfWork.GetRepository<Vehicles>();
-            if (IsVehicleExists(model.VIN, model.Id))
+            var repository = unitOfWork.GetRepository<VehiclesNotFound>();
+            if (IsUserVehicleExists(model.VIN, model.Id))
             {
                 response.Id = -1;
                 response.Name = model.VIN;
@@ -189,7 +189,7 @@ namespace CLIMFinders.Infrastructure.Repositories
             {
                 if (model.Id == 0)
                 {
-                    var mappedObj = mapper.Map<Vehicles>(model);
+                    var mappedObj = mapper.Map<VehiclesNotFound>(model);
                     mappedObj.UserId = _userService.GetUserId();
                     mappedObj.AddedById = mappedObj.ModifiedById = _userService.GetUserId();
                     var entity = repository.Insert(mappedObj);
@@ -247,6 +247,11 @@ namespace CLIMFinders.Infrastructure.Repositories
         bool IsVehicleExists(string vIN, int Id = 0)
         {
             var repository = unitOfWork.GetRepository<Vehicles>();
+            return repository != null && repository.GetAll().Any(x => x.VIN == vIN && x.Id != Id);
+        }
+        bool IsUserVehicleExists(string vIN, int Id = 0)
+        {
+            var repository = unitOfWork.GetRepository<VehiclesNotFound>();
             return repository != null && repository.GetAll().Any(x => x.VIN == vIN && x.Id != Id);
         }
     }
