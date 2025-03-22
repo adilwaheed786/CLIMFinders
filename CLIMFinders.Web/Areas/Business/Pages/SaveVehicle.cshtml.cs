@@ -1,5 +1,6 @@
 using CLIMFinders.Application.DTOs;
 using CLIMFinders.Application.Interfaces;
+using CLIMFinders.Infrastructure.Repositories;
 using CLIMFinders.Web.ServiceExtension;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace CLIMFinders.Web.Areas.Business.Pages
 { 
     [CustomAuthorize("Business", "SuperAdmin")]
-    public class SaveVehicleModel(IVehicleService vehicleService) : PageModel
+    public class SaveVehicleModel(IVehicleService vehicleService, IAuthService authService, IEmailService emailService) : PageModel
     {
         private readonly IVehicleService vehicleService = vehicleService;
+        private readonly IAuthService _authService = authService;
+        private readonly IEmailService _emailService = emailService;
         public List<SelectListItem> VehicleColors { get; set; }
         public List<SelectListItem> VehicleMakes { get; set; }
         public List<SelectListItem> ModelYear { get; set; }
@@ -53,6 +56,26 @@ namespace CLIMFinders.Web.Areas.Business.Pages
                 BindDropdowns();
                 ModelState.AddModelError(string.Empty, result.Status);
                 return Page();
+            }
+            else
+            {
+                var VehicelNotFoundExist = vehicleService.MatchVehicleNotFound(result.Name);
+                if (VehicelNotFoundExist != null)
+                {
+                    var normaluser = _authService.GetUser(VehicelNotFoundExist.UserId);
+                    string normalsubject = "Vehicle Has Been Found";
+                    string normalmessage = $@"
+            <p>Dear {normaluser.FullName},</p>
+            <p>We have found a vehicle matching the details you provided:</p>
+            <ul>
+                <li><strong>VIN:</strong> {VehicelNotFoundExist.VIN}</li>
+                <li><strong>Year:</strong> {VehicelNotFoundExist.Year}</li>
+                <li><strong>Location:</strong> {VehicelNotFoundExist.LocationDetails}</li>
+                <li><strong>Impound Fees:</strong> ${VehicelNotFoundExist.ImpoundFees}</li>
+            </ul>";
+                    _emailService.SendEmail(normaluser.Email, normalsubject, normalmessage, true);
+                    _emailService.SendEmail(result.Email, normalsubject, normalmessage, true);
+                }
             }
             return RedirectToPage("/ManageVehicles", new { area = "Business" });
 

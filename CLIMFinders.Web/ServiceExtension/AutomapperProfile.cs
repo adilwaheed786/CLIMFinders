@@ -16,7 +16,9 @@ namespace CLIMFinders.Web.ServiceExtension
                 .ReverseMap();
 
             CreateMap<Vehicles, VehicleDto>().ReverseMap();
+            CreateMap<VehiclesNotFound, VehicleListDto>().ReverseMap();
             CreateMap<VehiclesNotFound, VehicleDto>().ReverseMap();
+            CreateMap<User, UserResponseDto>().ReverseMap();
             //CreateMap<Payments, PaymentRequestDto>().ReverseMap();
 
             CreateMap<Vehicles, VehicleListDto>()

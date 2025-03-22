@@ -10,6 +10,7 @@ namespace CLIMFinders.Application.Interfaces
     public interface IAuthService
     {
         LoginResponseDto UserLogin(LoginDto loginDto);
+        UserResponseDto GetUser(int userId);
         ResponseDto ChangePassword(ChangePasswordDto dto);
         ResponseDto ResetPassword(ForgotPasswordDto dto); 
     }

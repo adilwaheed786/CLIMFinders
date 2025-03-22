@@ -36,7 +36,7 @@ namespace CLIMFinders.Infrastructure.Repositories
                 else
                 {
                     response = _mapper.Map<LoginResponseDto>(entity);
-                    response.IsActiveSubscription = entity.RoleId == (int)RoleEnum.SuperAdmin ? true : _subscription.IsSubscriptionActive(entity.SubscriptionId);
+                    //response.IsActiveSubscription = entity.RoleId == (int)RoleEnum.SuperAdmin ? true : _subscription.IsSubscriptionActive(entity.SubscriptionId);
                 }
                 return response;
             }
@@ -139,6 +139,33 @@ namespace CLIMFinders.Infrastructure.Repositories
             };
             var ContentToFill = _emailHelper.FillEmailContents(emailContent, "resetpassword", entity.FullName);
             _emailService.SendEmail(entity.Email, "Password reset successfully", ContentToFill, true);
+        }
+
+        public UserResponseDto GetUser(int userId)
+        {
+            var response = new UserResponseDto();
+            try
+            {
+                var repository = unitOfWork.GetRepository<User>();
+                var entity = repository.FirstOrDefault(e => e.Id == userId);
+
+                if (entity == null)
+                {
+                    response.Id = 0;
+                    response.UIMessage = "User Not Found";
+                }
+                else
+                {
+                    response = _mapper.Map<UserResponseDto>(entity);
+                }
+                return response;
+            }
+            catch
+            {
+                response.Id = -1;
+                response.UIMessage = "An error has been occurred.";
+                throw;
+            }
         }
     }
 }

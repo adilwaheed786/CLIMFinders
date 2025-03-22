@@ -254,5 +254,23 @@ namespace CLIMFinders.Infrastructure.Repositories
             var repository = unitOfWork.GetRepository<VehiclesNotFound>();
             return repository != null && repository.GetAll().Any(x => x.VIN == vIN && x.Id != Id);
         }
+
+
+        public VehicleListDto MatchVehicleNotFound(string Id)
+        {
+            try
+            {
+                var repository = unitOfWork.GetRepository<VehiclesNotFound>();
+                var vehicleEntity = repository.GetAll().FirstOrDefault(x => x.VIN == Id);
+                if (vehicleEntity == null)
+                    return null;
+                var vehicleDto = mapper.Map<VehicleListDto>(vehicleEntity);
+                return vehicleDto;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
