@@ -33,9 +33,9 @@ namespace CLIMFinders.Web.Controllers
             return Ok(new { data = resultDto });
         }
         [HttpPost("uploadfile")]
-        public async Task<IActionResult> UploadFileAndSendEmail([FromForm] IFormFile file, [FromForm] string emailAddress)
+        public async Task<IActionResult> UploadFileAndSendEmail([FromForm] DocumentUploadDto model)
         {
-            if (file == null || file.Length == 0)
+            if (model.Attachment == null || model.Attachment.Length == 0)
             {
                 return BadRequest(new { message = "File is required." });
             }
@@ -44,18 +44,24 @@ namespace CLIMFinders.Web.Controllers
             string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
             Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
 
-            string filePath = Path.Combine(uploadsFolder, file.FileName);
+            string filePath = Path.Combine(uploadsFolder, model.Attachment.FileName);
 
             // Save the file to the server
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await file.CopyToAsync(stream);
+                await model.Attachment.CopyToAsync(stream);
             }
 
-            // Send Email with Attachment
-            string subject = "Uploaded Vehicle File";
-            string message = "Please find the attached file.";
+            // Prepare email content
+            string subject = "Vehicle Document Submission";
+            string message = $@"
+        <p><strong>Name:</strong> {model.Name}</p>
+        <p><strong>Email:</strong> {model.Email}</p>
+        <p><strong>Details:</strong> {model.Details}</p>
+        <p><strong>VIN:</strong> {model.VIN}</p>
+        <p>Please find the attached document.</p>";
 
+            // Send email with attachment
             await _emailService.SendEmailWithAttachment(subject, message, filePath);
 
             // Delete file after sending

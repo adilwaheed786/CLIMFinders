@@ -4,14 +4,12 @@
     ViewData["Title"] = "Vehicle Search";
 }
 <div class="container my-5 pt-3">
-    <!-- File upload section -->
-    <div class="row mt-3">
-        <div class="col-md-10">
-            <input type="file" id="fileInput" class="form-control" required>
-        </div>
-        <div class="col-md-2">
-            <button id="uploadButton" class="btn btn-success w-100">Upload</button>
-        </div>
+    <!-- Alert Message with Upload Button -->
+    <div class="alert alert-info d-flex justify-content-between align-items-center" role="alert">
+        <span><strong>Note:</strong> If your vehicle matches our records, please provide complete details about your vehicle, including the required documents, for further verification.</span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+            Upload Vehicle Documents
+        </button>
     </div>
 </div>
 <h2 class="text-center my-4">Search for Your Vehicle</h2>
@@ -52,6 +50,50 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap Modal -->
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Upload Vehicle Documents</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" novalidate>
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">Name</label>
+                        <input type="text" id="nameInput" class="form-control" required>
+                        <div class="invalid-feedback">Please enter your name.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email</label>
+                        <input type="email" id="emailInput" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="vinInputValue" class="form-label">VIN</label>
+                        <input type="text" id="vinInputValue" class="form-control" required>
+                        <div class="invalid-feedback">Please enter the vehicle's VIN.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="detailsInput" class="form-label">Details</label>
+                        <textarea id="detailsInput" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileInput" class="form-label">Upload Document</label>
+                        <input type="file" id="fileInput" class="form-control" required>
+                        <div class="invalid-feedback">Please upload a document.</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="uploadButton" class="btn btn-success">Upload</button>
+            </div>
         </div>
     </div>
 </div>

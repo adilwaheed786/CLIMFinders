@@ -104,16 +104,25 @@
             }
         });
     });
-
     $("#uploadButton").on("click", function (e) {
-        var fileInput = document.getElementById("fileInput");
-        var email = $("#emailInput").val();
+        var form = document.getElementById("uploadForm");
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+        } 
         var formData = new FormData();
+        formData.append("Name", $("#nameInput").val());
+        formData.append("Email", $("#emailInput").val());
+        formData.append("Details", $("#detailsInput").val());
+        formData.append("VIN", $("#vinInputValue").val());
 
+        var fileInput = document.getElementById("fileInput");
         if (fileInput.files.length > 0) {
-            formData.append("file", fileInput.files[0]);
+            formData.append("Attachment", fileInput.files[0]);
+        } else {
+            alert("Please select a file.");
+            return;
         }
-        formData.append("emailAddress", email);
 
         $.ajax({
             url: "/api/search/uploadfile",
@@ -122,7 +131,9 @@
             contentType: false,
             processData: false,
             success: function (response) {
-                alert("Email sent successfully with file!");
+                alert("Email sent successfully with the document!");
+                $("#uploadModal").modal("hide"); // Hide modal after successful upload
+                $("#uploadForm")[0].reset(); // Clear form fields
             },
             error: function (xhr) {
                 console.log(xhr);
