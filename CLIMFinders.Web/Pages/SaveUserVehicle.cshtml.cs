@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace CLIMFinders.Web.Pages
 {
     [CustomAuthorize("Users")]
-    public class SaveUserVehicleModel(IVehicleService vehicleService) : PageModel
+    public class SaveUserVehicleModel(IVehicleService vehicleService,IEmailService emailService,IAuthService authService) : PageModel
     {
         private readonly IVehicleService vehicleService = vehicleService;
         public List<SelectListItem> VehicleColors { get; set; }

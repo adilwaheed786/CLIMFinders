@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace CLIMFinders.Web.Areas.Business.Pages
 { 
     [CustomAuthorize("Business", "SuperAdmin")]
-    public class SaveVehicleModel(IVehicleService vehicleService, IAuthService authService, IEmailService emailService) : PageModel
+    public class SaveVehicleModel(IVehicleService vehicleService, IAuthService authService, IEmailService emailService, IUserService userService) : PageModel
     {
         private readonly IVehicleService vehicleService = vehicleService;
+        private readonly IUserService _userService = userService;
         private readonly IAuthService _authService = authService;
         private readonly IEmailService _emailService = emailService;
         public List<SelectListItem> VehicleColors { get; set; }
@@ -63,6 +64,7 @@ namespace CLIMFinders.Web.Areas.Business.Pages
                 if (VehicelNotFoundExist != null)
                 {
                     var normaluser = _authService.GetUser(VehicelNotFoundExist.UserId);
+                    var bussinessuser = _authService.GetUser(_userService.GetUserId());
                     string normalsubject = "Vehicle Has Been Found";
                     string normalmessage = $@"
             <p>Dear {normaluser.FullName},</p>
@@ -74,7 +76,7 @@ namespace CLIMFinders.Web.Areas.Business.Pages
                 <li><strong>Impound Fees:</strong> ${VehicelNotFoundExist.ImpoundFees}</li>
             </ul>";
                     _emailService.SendEmail(normaluser.Email, normalsubject, normalmessage, true);
-                    _emailService.SendEmail(result.Email, normalsubject, normalmessage, true);
+                    _emailService.SendEmail(bussinessuser.Email, normalsubject, normalmessage, true);
                 }
             }
             return RedirectToPage("/ManageVehicles", new { area = "Business" });
