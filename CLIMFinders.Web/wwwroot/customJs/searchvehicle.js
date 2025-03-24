@@ -34,7 +34,7 @@
                 "data": "isImpoundFeesPaid",
                 "render": function (data, type, row) {
                     if (data) {
-                        return `<span class="badge badge-success">Paid</span>`;
+                        return `<span class="bg-success badge">Already Paid</span>`;
                     } else {
                         return `<button class="btn btn-warning btn-sm pay-fees" data-id="${row.vin}">Need to Pay</button>`;
                     }

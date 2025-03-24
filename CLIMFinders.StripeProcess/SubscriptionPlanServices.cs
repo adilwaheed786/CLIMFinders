@@ -13,13 +13,14 @@ using System.Web;
 namespace CLIMFinders.StripeProcess
 {
     public class SubscriptionPlanServices(IConfiguration configuration, IStripeClient _stripeClient, IEmailService emailService,
-        IRegisterService registerService, Lazy<IAuthService> authService, IUserService userService) : ISubscriptionPlanServices
+        IRegisterService registerService, Lazy<IAuthService> authService, IUserService userService,IVehicleService vehicleService) : ISubscriptionPlanServices
     {
         private readonly IConfiguration _configuration = configuration;
         private readonly IStripeClient stripeClient = _stripeClient;
         private readonly IRegisterService _registerService = registerService;
         private readonly IEmailService _emailService = emailService;
         private readonly IUserService _userService = userService;
+        private readonly IVehicleService _vehicleService = vehicleService;
         private readonly Lazy<IAuthService> _authService= authService;
 
         public string SubscripePlan(SubscriptionRequest plan)
@@ -151,6 +152,11 @@ namespace CLIMFinders.StripeProcess
                 InvoiceCreation = new SessionInvoiceCreationOptions
                 {
                     Enabled = true
+                },
+                Metadata = new Dictionary<string, string>
+                {
+                     { "VIN", request.VIN },
+                     { "VehicleId", request.Id.ToString() },
                 }
             };
 
@@ -242,13 +248,10 @@ namespace CLIMFinders.StripeProcess
                     if (invoice.Status == "paid") // Ensure it's already paid
                     {
                         Console.WriteLine($"Invoice URL: {invoice.HostedInvoiceUrl}");
-                        PersonInfoDto personInfo = new()
-                        {
-                            Email = invoice.CustomerEmail,
-                            Name = invoice.CustomerName
-                        };
+                        var vechile = _vehicleService.UpdateVehicleFeesStatus(Convert.ToInt16(session.Metadata["VehicleId"]));                       
+
                         //return invoice.HostedInvoiceUrl;
-                        _emailService.SendEmail(personInfo.Email, "Your Invoice - Payment Successful", $"<p>Thank you for your payment!</p><p>You can download your invoice here: <a href='{invoice.HostedInvoiceUrl}'>View Invoice</a></p>", true);
+                        _emailService.SendEmail(invoice.CustomerEmail, "Your Invoice - Payment Successful", $"<p>Thank you for your payment!</p><p>You can download your invoice here: <a href='{invoice.HostedInvoiceUrl}'>View Invoice</a></p>", true);
                     }
                     else
                     {

@@ -287,6 +287,23 @@ namespace CLIMFinders.Infrastructure.Repositories
             }
         }
 
-        
+        public VehicleDto UpdateVehicleFeesStatus(int Id)
+        {
+            try
+            {
+                var repository = unitOfWork.GetRepository<Vehicles>();
+                var response = repository.GetById(Id);
+                response.IsImpoundFeesPaid = true;
+                repository.Update(response);
+                repository.Save();
+                var vehicle = mapper.Map<VehicleDto>(response);
+                return vehicle;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 }
