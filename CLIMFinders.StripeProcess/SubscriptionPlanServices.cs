@@ -97,7 +97,6 @@ namespace CLIMFinders.StripeProcess
             var customerService = new CustomerService();
 
             var appcustomer = _authService.Value.GetUser(_userService.GetUserId());
-            // Check if customer already exists (to prevent duplicates)
             var customers = customerService.List(new CustomerListOptions { Email = appcustomer.Email });
             string? customerId = customers.Data.Count > 0 ? customers.Data[0].Id : null;
             if (customerId == null)
@@ -117,6 +116,8 @@ namespace CLIMFinders.StripeProcess
                     Name = appcustomer.FullName,
                 });
             }
+
+            // ✅ **Create Checkout Session Linked to Invoice**
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string> { "card" },
@@ -128,20 +129,17 @@ namespace CLIMFinders.StripeProcess
                 PriceData = new SessionLineItemPriceDataOptions
                 {
                     Currency = "usd",
-                     ProductData = new SessionLineItemPriceDataProductDataOptions
-        {
-            Name = $"Impound Fees for {request.VIN}",
-            Description = $"Payment required to release the impounded vehicle - VIN: {request.VIN}.",
-            Images = new List<string>
-            {
-                "https://impoundfinders.com/images/logo.png" // Placeholder vehicle image
-            },
-            Metadata = new Dictionary<string, string>
-            {
-                { "VIN", request.VIN },
-                { "VehicleId", request.Id.ToString() },
-            }
-        },
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = $"Impound Fees for Vehicle - VIN {request.VIN}",
+                        Description = $"Payment required to release the impounded vehicle - VIN: {request.VIN}.",
+                        Images = new List<string> { "https://impoundfinders.com/images/logo.png" },
+                        Metadata = new Dictionary<string, string>
+                        {
+                            { "VIN", request.VIN },
+                            { "VehicleId", request.Id.ToString() },
+                        }
+                    },
                     UnitAmount = (long)(request.ImpoundFees * 100)
                 },
                 Quantity = 1
@@ -150,9 +148,17 @@ namespace CLIMFinders.StripeProcess
                 Mode = "payment",
                 SuccessUrl = $"{domain}/PaymentSuccess?session_id={{CHECKOUT_SESSION_ID}}",
                 CancelUrl = $"{domain}/PaymentCancel",
+                InvoiceCreation = new SessionInvoiceCreationOptions
+                {
+                    Enabled = true
+                }
             };
+
             var sessionService = new SessionService(stripeClient);
             var session = sessionService.Create(options);
+
+            Console.WriteLine($"Session Created: {session.Id}, Invoice: {session.InvoiceId}");
+
             return session.Url;
         }
         public void SendInvoiceOnSubscriptionSuccess(string sessionId, int UserId)
@@ -221,12 +227,37 @@ namespace CLIMFinders.StripeProcess
                 {
                     throw new Exception("Session not found.");
                 }
+                var invoiceService = new InvoiceService();
 
-                // Get PaymentIntent linked to this session
-                var paymentIntentId = session.PaymentIntentId;
-                if (string.IsNullOrEmpty(paymentIntentId))
+                var invoices = invoiceService.List(new InvoiceListOptions
                 {
-                    throw new Exception("PaymentIntent not found in session.");
+                    Customer = session.CustomerId,
+                    Limit = 1
+                });
+
+                if (invoices.Data.Count > 0)
+                {
+                    var invoice = invoices.Data[0]; // Get most recent invoice
+
+                    if (invoice.Status == "paid") // Ensure it's already paid
+                    {
+                        Console.WriteLine($"Invoice URL: {invoice.HostedInvoiceUrl}");
+                        PersonInfoDto personInfo = new()
+                        {
+                            Email = invoice.CustomerEmail,
+                            Name = invoice.CustomerName
+                        };
+                        //return invoice.HostedInvoiceUrl;
+                        _emailService.SendEmail(personInfo.Email, "Your Invoice - Payment Successful", $"<p>Thank you for your payment!</p><p>You can download your invoice here: <a href='{invoice.HostedInvoiceUrl}'>View Invoice</a></p>", true);
+                    }
+                    else
+                    {
+                        throw new Exception("Invoice is not yet paid.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("No invoice found for this payment.");
                 }
             }
             catch (Exception ex)
