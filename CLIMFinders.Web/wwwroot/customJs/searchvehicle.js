@@ -109,20 +109,44 @@
         if (!form.checkValidity()) {
             form.classList.add("was-validated");
             return;
-        } 
+        }
+        // VIN Validation (must be exactly 17 characters)
+        var vinInput = $("#vinInputValue").val().trim();
+        if (vinInput.length !== 17) {
+            $("#vinInputValue").addClass("is-invalid"); // Highlight invalid field
+            alert("VIN must be exactly 17 characters long.");
+            return;
+        } else {
+            $("#vinInputValue").removeClass("is-invalid");
+        }
+        // Ensure all required files are uploaded
+        var requiredFiles = ["ownershipFile", "idFile", "insuranceFile", "paymentFile"];
+        var isValid = true;
+
+        requiredFiles.forEach(function (fileId) {
+            var fileInput = document.getElementById(fileId);
+            if (fileInput.files.length === 0) {
+                fileInput.classList.add("is-invalid");
+                isValid = false;
+            } else {
+                fileInput.classList.remove("is-invalid");
+            }
+        });
+
+        if (!isValid) {
+            alert("Please upload all required documents.");
+            return;
+        }
+
         var formData = new FormData();
         formData.append("Name", $("#nameInput").val());
         formData.append("Email", $("#emailInput").val());
-        formData.append("Details", $("#detailsInput").val());
-        formData.append("VIN", $("#vinInputValue").val());
+        formData.append("VIN", vinInput);
 
-        var fileInput = document.getElementById("fileInput");
-        if (fileInput.files.length > 0) {
-            formData.append("Attachment", fileInput.files[0]);
-        } else {
-            alert("Please select a file.");
-            return;
-        }
+        requiredFiles.forEach(function (fileId) {
+            var fileInput = document.getElementById(fileId);
+            formData.append("Attachments", fileInput.files[0]);
+        });
 
         $.ajax({
             url: "/api/search/uploadfile",
@@ -131,7 +155,7 @@
             contentType: false,
             processData: false,
             success: function (response) {
-                alert("Email sent successfully with the document!");
+                alert("Files uploaded and email sent successfully!");
                 $("#uploadModal").modal("hide"); // Hide modal after successful upload
                 $("#uploadForm")[0].reset(); // Clear form fields
             },

@@ -27,7 +27,7 @@ namespace CLIMFinders.Infrastructure.Repositories
             Execute(subject, message, emailAddress, Isadmin);
         }
 
-        public async Task SendEmailWithAttachment(string subject, string message, string filePath)
+        public async Task SendEmailWithAttachments(string subject, string message, List<string> attachmentPaths)
         {
             var smtpProvider = _smtpSettings.Server;
             var portNumber = Convert.ToInt32(_smtpSettings.Port);
@@ -45,12 +45,14 @@ namespace CLIMFinders.Infrastructure.Repositories
                 HtmlBody = message
             };
 
-            // Agar file exist karti hai to attachment add karein
-            if (File.Exists(filePath))
+            // Attach all files
+            foreach (var filePath in attachmentPaths)
             {
-                bodyBuilder.Attachments.Add(filePath);
+                if (File.Exists(filePath))
+                {
+                    bodyBuilder.Attachments.Add(filePath);
+                }
             }
-
             email.Body = bodyBuilder.ToMessageBody();
 
             using var smtp = new SmtpClient();

@@ -11,8 +11,7 @@ namespace CLIMFinders.Application.DTOs
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Details { get; set; }
         public string VIN { get; set; }
-        public IFormFile Attachment { get; set; }
+        public List<IFormFile> Attachments { get; set; } // Required files
     }
 }

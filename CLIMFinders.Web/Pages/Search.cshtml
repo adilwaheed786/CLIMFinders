@@ -47,12 +47,12 @@
                         <th>Model</th>
                         <th>Color</th>
                         <th>Year</th>
-                        <th>Contact Info</th>
+                        <th>Contact</th>
                         <th>Impound Fees</th>
-                        <th>Location Detail</th>
+                        <th>Location</th>
                         <th>Impound Lot</th>
                         <th>Facility</th>
-                        <th>Date Impounded</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -71,29 +71,48 @@
             </div>
             <div class="modal-body">
                 <form id="uploadForm" novalidate>
-                    <div class="mb-3">
-                        <label for="nameInput" class="form-label">Name</label>
-                        <input type="text" id="nameInput" class="form-control" required>
-                        <div class="invalid-feedback">Please enter your name.</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="nameInput" class="form-label">Name</label>
+                            <input type="text" id="nameInput" class="form-control" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emailInput" class="form-label">Email</label>
+                            <input type="email" id="emailInput" class="form-control" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="emailInput" class="form-label">Email</label>
-                        <input type="email" id="emailInput" class="form-control" required>
-                        <div class="invalid-feedback">Please enter a valid email address.</div>
-                    </div>
+
                     <div class="mb-3">
                         <label for="vinInputValue" class="form-label">VIN</label>
                         <input type="text" id="vinInputValue" class="form-control" required>
                         <div class="invalid-feedback">Please enter the vehicle's VIN.</div>
                     </div>
+
+                    <!-- Required Document Upload Fields -->
                     <div class="mb-3">
-                        <label for="detailsInput" class="form-label">Details</label>
-                        <textarea id="detailsInput" class="form-control" rows="3" required></textarea>
+                        <label for="ownershipFile" class="form-label">Proof of Ownership</label>
+                        <input type="file" id="ownershipFile" class="form-control required-file">
+                        <div class="invalid-feedback">Please upload Proof of Ownership.</div>
                     </div>
+
                     <div class="mb-3">
-                        <label for="fileInput" class="form-label">Upload Document</label>
-                        <input type="file" id="fileInput" class="form-control" required>
-                        <div class="invalid-feedback">Please upload a document.</div>
+                        <label for="idFile" class="form-label">Valid Photo ID</label>
+                        <input type="file" id="idFile" class="form-control required-file">
+                        <div class="invalid-feedback">Please upload a Valid Photo ID.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="insuranceFile" class="form-label">Current Proof of Insurance</label>
+                        <input type="file" id="insuranceFile" class="form-control required-file">
+                        <div class="invalid-feedback">Please upload Proof of Insurance.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="paymentFile" class="form-label">Payment Receipt</label>
+                        <input type="file" id="paymentFile" class="form-control required-file">
+                        <div class="invalid-feedback">Please upload the Payment Receipt.</div>
                     </div>
                 </form>
             </div>
@@ -104,5 +123,4 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="~/customJs/searchvehicle.js"></script>

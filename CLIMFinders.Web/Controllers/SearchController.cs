@@ -35,21 +35,43 @@ namespace CLIMFinders.Web.Controllers
         [HttpPost("uploadfile")]
         public async Task<IActionResult> UploadFileAndSendEmail([FromForm] DocumentUploadDto model)
         {
-            if (model.Attachment == null || model.Attachment.Length == 0)
+            if (model.Attachments == null || model.Attachments.Count < 4)
             {
-                return BadRequest(new { message = "File is required." });
+                return BadRequest(new { message = "All required documents must be uploaded." });
             }
 
-            // File save path
             string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
-            Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
+            Directory.CreateDirectory(uploadsFolder);
 
-            string filePath = Path.Combine(uploadsFolder, model.Attachment.FileName);
+            List<string> savedFilePaths = new List<string>();
+            List<string> fileDetails = new List<string>();
 
-            // Save the file to the server
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            // Map file types to their respective names
+            string[] fileTypeNames = { "Proof of Ownership", "Valid Photo ID", "Proof of Insurance", "Payment Receipt" };
+
+            int index = 0;
+            foreach (var file in model.Attachments)
             {
-                await model.Attachment.CopyToAsync(stream);
+                if (file.Length > 0)
+                {
+                    // Create unique file name
+                    string uniqueFileName = $"{DateTime.Now:yyyyMMdd_HHmmss}_{Guid.NewGuid()}_{file.FileName}";
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    savedFilePaths.Add(filePath);
+
+                    // Add file details for email
+                    if (index < fileTypeNames.Length)
+                    {
+                        fileDetails.Add($"<p><strong>{fileTypeNames[index]}:</strong> {file.FileName}</p>");
+                    }
+
+                    index++;
+                }
             }
 
             // Prepare email content
@@ -57,18 +79,23 @@ namespace CLIMFinders.Web.Controllers
             string message = $@"
         <p><strong>Name:</strong> {model.Name}</p>
         <p><strong>Email:</strong> {model.Email}</p>
-        <p><strong>Details:</strong> {model.Details}</p>
         <p><strong>VIN:</strong> {model.VIN}</p>
-        <p>Please find the attached document.</p>";
+        <p>Please find the attached required documents:</p>
+        {string.Join("\n", fileDetails)}
+    ";
 
-            // Send email with attachment
-            await _emailService.SendEmailWithAttachment(subject, message, filePath);
+            // Send email with attachments
+            await _emailService.SendEmailWithAttachments(subject, message, savedFilePaths);
 
-            // Delete file after sending
-            System.IO.File.Delete(filePath);
+            // Delete files after sending email
+            foreach (var filePath in savedFilePaths)
+            {
+                System.IO.File.Delete(filePath);
+            }
 
-            return Ok(new { message = "File uploaded and email sent successfully." });
+            return Ok(new { message = "All documents uploaded and email sent successfully." });
         }
+
     }
 }
 

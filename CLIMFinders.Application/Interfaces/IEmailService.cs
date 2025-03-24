@@ -10,6 +10,6 @@ namespace CLIMFinders.Application.Interfaces
     {
         // void SendEmail(string emailAddress, string subject, string body, string fromEmail = null, string displayName = null);
         void SendEmail(string emailAddress, string subject, string message, bool Isadmin = false);
-        Task SendEmailWithAttachment(string subject, string message, string filePath);
+        Task SendEmailWithAttachments(string subject, string message, List<string> attachmentPaths);
     }
 }
