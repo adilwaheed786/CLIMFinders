@@ -36,7 +36,7 @@ namespace CLIMFinders.Infrastructure.Repositories
                 else
                 {
                     response = _mapper.Map<LoginResponseDto>(entity);
-                    //response.IsActiveSubscription = entity.RoleId == (int)RoleEnum.SuperAdmin ? true : _subscription.IsSubscriptionActive(entity.SubscriptionId);
+                    response.IsActiveSubscription = entity.RoleId == (int)RoleEnum.SuperAdmin ? true : _subscription.IsSubscriptionActive(entity.SubscriptionId);
                 }
                 return response;
             }
