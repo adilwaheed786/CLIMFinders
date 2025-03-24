@@ -15,6 +15,11 @@ namespace CLIMFinders.Application.DTOs
         public string SessionId { get; set; }
         public string PriceId { get; set; }
     }
+    public class PayImpoundFeesRequest
+    {
+        public string vehicleVIN { get; set; }
+    }
+    
     public class SubscriptionRequest
     {
         public int Id { get; set; } = 0;

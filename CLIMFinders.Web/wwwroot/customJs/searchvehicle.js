@@ -29,10 +29,45 @@
                         hourCycle: 'h23'
                     });
                 }
+            },
+            {
+                "data": "isImpoundFeesPaid",
+                "render": function (data, type, row) {
+                    if (data) {
+                        return `<span class="badge badge-success">Paid</span>`;
+                    } else {
+                        return `<button class="btn btn-warning btn-sm pay-fees" data-id="${row.vin}">Need to Pay</button>`;
+                    }
+                }
             }
         ],
         "order": [[1, "asc"]], // Default sorting by VIN
         "lengthMenu": [10, 25, 50, 100] // Number of records per page
+    });
+
+    $('#vehiclesTable tbody').on('click', '.pay-fees', function () {
+        var vehicleId = $(this).data("id");
+        $.ajax({
+            url: "/api/SubscriptionPlan/ImpoundFeePayment",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ vehicleVIN: vehicleId }),
+            success: function (response) {
+                if (response.sessionUrl) {
+                    if (response.sessionUrl == "N") {
+                        alert("Error: Vehicle Not Found.");
+                    }
+                    else {
+                        window.location.href = response.sessionUrl;
+                    }
+                } else {
+                    alert("Error: Unable to create Stripe session.");
+                }
+            },
+            error: function () {
+                alert("Failed to initiate payment.");
+            }
+        });
     });
 
     //$("#searchButton").on("click", function (e) {

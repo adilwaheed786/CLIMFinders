@@ -238,6 +238,20 @@ namespace CLIMFinders.Infrastructure.Repositories
                 throw;
             }
         }
+        public VehicleDto GetVehicleByVIN(string VIN)
+        {
+            try
+            {
+                var repository = unitOfWork.GetRepository<Vehicles>();
+                var response = repository.GetAll().Where(x=>x.VIN==VIN).FirstOrDefault();
+                var vehicle = mapper.Map<VehicleDto>(response);
+                return vehicle;
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public void DeleteVehicle(int Id)
         {
             var repository = unitOfWork.GetRepository<Vehicles>();
@@ -272,5 +286,7 @@ namespace CLIMFinders.Infrastructure.Repositories
                 throw;
             }
         }
+
+        
     }
 }

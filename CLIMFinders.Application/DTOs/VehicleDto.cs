@@ -65,6 +65,7 @@ namespace CLIMFinders.Application.DTOs
         public string BoundStatus { get; set; }
         public string ContactInformation { get; set; }
         public string ImpoundFees { get; set; }
+        public bool IsImpoundFeesPaid { get; set; }
         public string LocationDetails { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]

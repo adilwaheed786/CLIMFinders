@@ -28,6 +28,8 @@ namespace CLIMFinders.Web.ServiceExtension
             services.AddScoped<ISubscriptionPlanServices, SubscriptionPlanServices>();
             services.AddScoped<Lazy<ISubscriptionPlanServices>>(sp =>
              new Lazy<ISubscriptionPlanServices>(() => sp.GetRequiredService<ISubscriptionPlanServices>()));
+            services.AddScoped(provider =>
+            new Lazy<IAuthService>(() => provider.GetRequiredService<IAuthService>())); 
             services.AddHttpContextAccessor();
         }
     }

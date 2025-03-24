@@ -6,7 +6,9 @@ namespace CLIMFinders.StripeProcess.Interfaces
     public interface ISubscriptionPlanServices
     {
         string SubscripePlan(SubscriptionRequest plan);
+        string ImpoundFeePayment(VehicleDto request);
         void SendInvoiceOnSubscriptionSuccess(string sessionId, int UserId);
+        void SendInvoiceOnPaymentSuccess(string sessionId, int UserId);
         bool IsSubscriptionActive(string subscriptionId);
         SubscriptionDetail GetSubscriptionById(string subscriptionId);
         Subscription GetSubscriptionByCustomerId(string customerId);

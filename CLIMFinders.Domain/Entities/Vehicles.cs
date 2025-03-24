@@ -17,6 +17,7 @@ namespace CLIMFinders.Domain.Entities
         public string LocationDetails { get; set; }
         public string ContactInformation { get; set; }
         public int ImpoundFees { get; set; }
+        public bool IsImpoundFeesPaid { get; set; }=false;
         public string ReasonImpoundent { get; set; }
         public DateTime PickedOn { get; set; } = DateTime.Now;
         public int UserId { get; set; }

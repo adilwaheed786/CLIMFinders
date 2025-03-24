@@ -7,18 +7,20 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 using Stripe.Checkout;
+using System.Numerics;
 using System.Web;
 
 namespace CLIMFinders.StripeProcess
 {
     public class SubscriptionPlanServices(IConfiguration configuration, IStripeClient _stripeClient, IEmailService emailService,
-        IRegisterService registerService) : ISubscriptionPlanServices
+        IRegisterService registerService, Lazy<IAuthService> authService, IUserService userService) : ISubscriptionPlanServices
     {
         private readonly IConfiguration _configuration = configuration;
         private readonly IStripeClient stripeClient = _stripeClient;
         private readonly IRegisterService _registerService = registerService;
         private readonly IEmailService _emailService = emailService;
-
+        private readonly IUserService _userService = userService;
+        private readonly Lazy<IAuthService> _authService= authService;
 
         public string SubscripePlan(SubscriptionRequest plan)
         {
@@ -88,6 +90,71 @@ namespace CLIMFinders.StripeProcess
             var session = sessionService.Create(options);
             return session.Url;
         }
+        public string ImpoundFeePayment(VehicleDto request)
+        {
+            StripeConfiguration.ApiKey = stripeClient.ApiKey;
+            var domain = _configuration["JwtSettings:Issuer"];
+            var customerService = new CustomerService();
+
+            var appcustomer = _authService.Value.GetUser(_userService.GetUserId());
+            // Check if customer already exists (to prevent duplicates)
+            var customers = customerService.List(new CustomerListOptions { Email = appcustomer.Email });
+            string? customerId = customers.Data.Count > 0 ? customers.Data[0].Id : null;
+            if (customerId == null)
+            {
+                var customer = customerService.Create(new CustomerCreateOptions
+                {
+                    Email = appcustomer.Email,
+                    Name = appcustomer.FullName,
+                });
+                customerId = customer.Id;
+            }
+            else
+            {
+                customerService.Update(customerId, new CustomerUpdateOptions
+                {
+                    Email = appcustomer.Email,
+                    Name = appcustomer.FullName,
+                });
+            }
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                Customer = customerId,
+                LineItems = new List<SessionLineItemOptions>
+        {
+            new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    Currency = "usd",
+                     ProductData = new SessionLineItemPriceDataProductDataOptions
+        {
+            Name = $"Impound Fees for {request.VIN}",
+            Description = $"Payment required to release the impounded vehicle - VIN: {request.VIN}.",
+            Images = new List<string>
+            {
+                "https://impoundfinders.com/images/logo.png" // Placeholder vehicle image
+            },
+            Metadata = new Dictionary<string, string>
+            {
+                { "VIN", request.VIN },
+                { "VehicleId", request.Id.ToString() },
+            }
+        },
+                    UnitAmount = (long)(request.ImpoundFees * 100)
+                },
+                Quantity = 1
+            }
+        },
+                Mode = "payment",
+                SuccessUrl = $"{domain}/PaymentSuccess?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = $"{domain}/PaymentCancel",
+            };
+            var sessionService = new SessionService(stripeClient);
+            var session = sessionService.Create(options);
+            return session.Url;
+        }
         public void SendInvoiceOnSubscriptionSuccess(string sessionId, int UserId)
         {
             var sessionService = new SessionService();
@@ -142,6 +209,33 @@ namespace CLIMFinders.StripeProcess
                 throw new Exception("No invoice found for this subscription.");
             }
         }
+        public void SendInvoiceOnPaymentSuccess(string sessionId, int UserId)
+        {
+            try
+            {
+                StripeConfiguration.ApiKey = stripeClient.ApiKey;
+                var sessionService = new SessionService();
+                var session = sessionService.Get(sessionId);
+
+                if (session == null)
+                {
+                    throw new Exception("Session not found.");
+                }
+
+                // Get PaymentIntent linked to this session
+                var paymentIntentId = session.PaymentIntentId;
+                if (string.IsNullOrEmpty(paymentIntentId))
+                {
+                    throw new Exception("PaymentIntent not found in session.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending invoice: {ex.Message}");
+                throw new Exception($"Error sending invoice: {ex.Message}");
+            }
+        }
+
         public bool IsSubscriptionActive(string subscriptionId)
         {
             StripeConfiguration.ApiKey = stripeClient.ApiKey;
@@ -268,5 +362,7 @@ namespace CLIMFinders.StripeProcess
             var subscriptions = service.List(options);
             return subscriptions.FirstOrDefault();
         }
+
+       
     }
 }

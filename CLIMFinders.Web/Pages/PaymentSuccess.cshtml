@@ -1,0 +1,19 @@
+﻿@page
+@model CLIMFinders.Web.Pages.PaymentSuccessModel
+@{
+    ViewData["Title"] = "Payment Successful";
+}
+
+<div class="text-center">
+    <!-- Home Page -->
+    <section class="py-5 text-center">
+        <div class="container">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h2>Payment Successful! 🎉</h2>
+                <p>Thank you for your payment.</p>
+                <a href="/Search" class="btn">Back to Home</a>
+            }
+        </div>
+    </section>
+</div>

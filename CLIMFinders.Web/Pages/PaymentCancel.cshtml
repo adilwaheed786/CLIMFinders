@@ -1,0 +1,18 @@
+﻿@page
+@model CLIMFinders.Web.Pages.PaymentCancelModel
+@{
+}
+<div class="text-center">
+    <!-- Home Page -->
+    <section class="py-5 text-center">
+        <div class="container">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h2>Payment Canceled ❌</h2>
+                <p>Your payment was not completed.</p>
+                <p>If this was a mistake, please try again.</p>
+                <a href="/Search" class="btn">Try Again</a>
+            }
+        </div>
+    </section>
+</div>
